@@ -46,20 +46,30 @@ class Usuario{
     }
 
 
-    public function loadByid(){
+    public function loadByid($id){
         $sql = new Sql();
 
         $results = $sql->select("SELECT * FROM funcionario WHERE idfuncionario = :ID", array(
             ":ID"=>$id
         ));
 
-        if(count($results) >0 ){
+        if(count($results) > 0 ){
             $row = $results[0];
-            $this->setIdfuncionario('idfuncionario');
-            $this->setDlogin("dlogin");
-            $this->setNome("nome");
-            $this->setNome("senha");
+            $this->setIdfuncionario($row['idfuncionario']);
+            $this->setNome($row['nome']);
+            $this->setDlogin($row['dlogin']);
+            $this->setDataCadastro(new DateTime($row['dataCadastro']));
         }
+    }
+
+    public function __toString(){
+        return json_encode(array(
+            "idfuncionario"=>$this->getIdfuncionario(),
+            "nome"=>$this->getNome(),
+            "dlogin"=>$this->getDlogin(),
+            "senha"=>$this->getSenha(),
+            "dataCadastro"=>$this->getDataCadastro()->format("d/m/y H:i:s")
+));
     }
 }
 
