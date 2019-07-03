@@ -69,6 +69,33 @@ public static function getList(){
 
     return $sql->select("SELECT * FROM funcionario ORDER BY dlogin;");
 }
+public static function search($login){
+    $sql = new Sql();
+
+    return $sql->select("SELECT * FROM funcionario WHERE dlogin LIKE :SEARCH ORDER BY dlogin", array(
+        ':SEARCH'=>"%".$login."%"
+    ));
+}
+
+public function login($login, $password){
+
+    $sql = new Sql();
+    $results = $sql->select("SELECT * FROM funcionario WHERE dlogin =:DLOGIN AND senha = :DPASSWORD", array(
+        "DLOGIN"=>$login,
+        "DPASSWORD"=>$password
+    ));
+
+    if(count($results) > 0){
+        $row = $results[0];
+        $this->setIdfuncionario($row['idfuncionario']);
+        $this->setDlogin($row['dlogin']);
+        $this->setSenha($row['senha']);
+        $this->setDataCadastro(new DateTime($row['dataCadastro']));
+    }else{
+        throw new Exception("Login e/ou senha Invalidos");
+    }
+    
+}
 
     public function __toString(){
         return json_encode(array(
@@ -78,7 +105,8 @@ public static function getList(){
             "senha"=>$this->getSenha(),
             "dataCadastro"=>$this->getDataCadastro()->format("d/m/y H:i:s")
 ));
-    }
+
+}
 }
 
 ?>
