@@ -62,6 +62,14 @@ class Usuario{
         }
     }
 
+
+
+public static function getList(){
+    $sql = new Sql();
+
+    return $sql->select("SELECT * FROM funcionario ORDER BY dlogin;");
+}
+
     public function __toString(){
         return json_encode(array(
             "idfuncionario"=>$this->getIdfuncionario(),
