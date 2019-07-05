@@ -54,11 +54,7 @@ class Usuario{
         ));
 
         if(count($results) > 0 ){
-            $row = $results[0];
-            $this->setIdfuncionario($row['idfuncionario']);
-            $this->setNome($row['nome']);
-            $this->setDlogin($row['dlogin']);
-            $this->setDataCadastro(new DateTime($row['dataCadastro']));
+            $this->setData($results[0]);
         }
     }
 
@@ -86,16 +82,43 @@ public function login($login, $password){
     ));
 
     if(count($results) > 0){
-        $row = $results[0];
-        $this->setIdfuncionario($row['idfuncionario']);
-        $this->setDlogin($row['dlogin']);
-        $this->setSenha($row['senha']);
-        $this->setDataCadastro(new DateTime($row['dataCadastro']));
+      $this->setData($results[0]);
+   
     }else{
         throw new Exception("Login e/ou senha Invalidos");
     }
     
 }
+
+public function setData($data){
+       
+        $this->setIdfuncionario($data['idfuncionario']);
+        $this->setNome($data['nome']);
+        $this->setDlogin($data['dlogin']);
+        $this->setSenha($data['senha']);
+        $this->setDataCadastro(new DateTime($data['dataCadastro']));
+}
+
+public function insert(){
+    $sql = new Sql();
+
+    $results = $sql->select("CALL sp_funcionario_insert(:NOME, :LOGIN, :PASSWORD)", array(
+        ':NOME'=>$this->getNome(),
+        ':LOGIN'=>$this->getDlogin(),
+        ':PASSWORD'=>$this->getSenha()
+    ));
+
+    if(count($results)>0){
+        $this->setData($results[0]);
+    }
+}
+
+public function __construct($nome ="", $login ="", $password =""){
+    $this->setNome($nome);
+    $this->setDlogin($login);
+    $this->setSenha($password);
+}
+
 
     public function __toString(){
         return json_encode(array(
@@ -107,6 +130,8 @@ public function login($login, $password){
 ));
 
 }
+
+
 }
 
 ?>

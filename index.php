@@ -18,8 +18,15 @@ require_once("config.php");
 
 //Carregar um usuario usando login e a senha
 
-$usuario = new Usuario();
-$usuario->login("xanhoso.filho", "RFEDWSYGT%$");
-echo $usuario;
+//$usuario = new Usuario();
+//$usuario->login("xanhoso.filho", "RFEDWSYGT%$");
+//echo $usuario;
+
+$aluno = new Usuario("Ferreira da silva","Antonio","fadsfa");
+
+
+$aluno->insert();
+
+echo $aluno;
 
 ?>
