@@ -129,6 +129,18 @@ public function update($nome,$login ="", $senha=""){
     ));
 }
 
+public function delete(){
+    $sql = new Sql();
+    $sql->query("DELETE FROM funcionario WHERE idfuncionario = :ID",array(
+        ':ID'=>$this->getIdfuncionario()
+    ));
+
+    $this->setIdfuncionario(0);
+    $this->setDlogin("");
+    $this->setSenha("");
+    $this->setDataCadastro(new DateTime());
+}
+
 public function __construct($nome ="", $login ="", $password =""){
     $this->setNome($nome);
     $this->setDlogin($login);

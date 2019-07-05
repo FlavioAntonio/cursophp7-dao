@@ -29,12 +29,15 @@ require_once("config.php");
 
 //echo $aluno;
 
+//Atualizando um dado na base de dados
+//$usuario = new Usuario();
+//$usuario->loadByid(6);
+//$usuario->update("Ricardo oliveira", "ricardo.oliveira","EDEDEDGGG");
+//echo $usuario;
 
 $usuario = new Usuario();
-
-$usuario->loadByid(6);
-
-$usuario->update("Ricardo oliveira", "ricardo.oliveira","EDEDEDGGG");
+$usuario->loadByid(8);
+$usuario->delete();
 
 echo $usuario;
 
