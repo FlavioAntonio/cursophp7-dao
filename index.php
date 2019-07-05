@@ -22,11 +22,20 @@ require_once("config.php");
 //$usuario->login("xanhoso.filho", "RFEDWSYGT%$");
 //echo $usuario;
 
-$aluno = new Usuario("Ferreira da silva","Antonio","fadsfa");
+//Criando um novo usuario
+//$aluno = new Usuario("Ferreira da silva","Antonio","fadsfa");
+
+//$aluno->insert();
+
+//echo $aluno;
 
 
-$aluno->insert();
+$usuario = new Usuario();
 
-echo $aluno;
+$usuario->loadByid(6);
+
+$usuario->update("Ricardo oliveira", "ricardo.oliveira","EDEDEDGGG");
+
+echo $usuario;
 
 ?>

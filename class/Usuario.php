@@ -113,6 +113,22 @@ public function insert(){
     }
 }
 
+public function update($nome,$login ="", $senha=""){
+    $this->setNome($nome);
+    $this->setDlogin($login);
+    $this->setSenha($senha);
+
+    $sql = new Sql();
+
+    $sql->query("UPDATE funcionario SET nome = :NOME, dlogin = :DLOGIN, senha = :DPASSWORD WHERE idfuncionario = :ID", array(
+        ':NOME'=>$this->getNome(),
+        ':DLOGIN'=>$this->getDlogin(),
+        ':DPASSWORD'=>$this->getSenha(),
+        'ID'=>$this->getIdfuncionario()
+
+    ));
+}
+
 public function __construct($nome ="", $login ="", $password =""){
     $this->setNome($nome);
     $this->setDlogin($login);
