@@ -1,5 +1,6 @@
 <?php
 //Isto é um teste
+//teste
 class Usuario{
     private $idfuncionario;
     private $nome;
