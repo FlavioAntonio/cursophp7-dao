@@ -1,5 +1,5 @@
 <?php
-
+//Isto é um teste
 class Usuario{
     private $idfuncionario;
     private $nome;
